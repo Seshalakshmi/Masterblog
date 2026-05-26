@@ -45,8 +45,6 @@ def add():
 
 @app.route('/delete/<int:post_id>')
 def delete(post_id):
-    # Find the blog post with the given id and remove it from the list
-    # Redirect back to the home page
     blog_posts = read_data()
     for posts in blog_posts:
         if posts['id'] == post_id:
@@ -81,8 +79,6 @@ def update(post_id):
         write_data(blog_posts)
         return redirect(url_for('index'))
 
-    # Else, it's a GET request
-    # So display the update.html page
     return render_template('update.html', post=post)
 
 
