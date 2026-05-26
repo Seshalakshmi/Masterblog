@@ -140,13 +140,14 @@ def update(post_id):
     blog_posts = read_data()
     post = fetch_post_by_id(post_id)
     if post is None:
-        # Post not found
         return "Post not found", 404
 
     if request.method == 'POST':
-        post['title'] = request.form.get('title')
-        post['author'] = request.form.get('author')
-        post['content'] = request.form.get('content')
+        for posts in blog_posts:
+            if posts['id'] == post_id:
+                posts['title'] = request.form.get('title')
+                posts['author'] = request.form.get('author')
+                posts['content'] = request.form.get('content')
 
         write_data(blog_posts)
         return redirect(url_for('index'))
